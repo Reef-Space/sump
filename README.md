@@ -1,5 +1,7 @@
 # Sump
 
+# If you've stumbled across this page, please don't try to use it. It's entirely vibe coded and in very early stages and not worth the time or risk to your system
+
 Two things that work together, both free and open source:
 
 1. **The Sump integration** — connects Home Assistant to your aquarium
