@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sump</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🐠 Sump</h1>
+    <nav>
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="log">Log</button>
+      <button class="tab-btn" data-tab="targets">Targets</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-dashboard" class="tab active">
+      <div class="param-select-row">
+        <label for="param-select">Parameter</label>
+        <select id="param-select"></select>
+        <label for="range-select">Range</label>
+        <select id="range-select">
+          <option value="7">7 days</option>
+          <option value="30" selected>30 days</option>
+          <option value="90">90 days</option>
+          <option value="365">1 year</option>
+        </select>
+      </div>
+
+      <div class="stats-row" id="stats-row"></div>
+
+      <div class="chart-card">
+        <canvas id="chart" width="900" height="360"></canvas>
+      </div>
+    </section>
+
+    <section id="tab-log" class="tab">
+      <form id="entry-form" class="entry-form">
+        <h2>Add manual reading</h2>
+        <div class="form-row">
+          <label>Parameter
+            <input type="text" id="entry-parameter" list="parameter-list" required placeholder="e.g. pH" />
+            <datalist id="parameter-list"></datalist>
+          </label>
+          <label>Value
+            <input type="number" step="any" id="entry-value" required />
+          </label>
+          <label>Unit
+            <input type="text" id="entry-unit" placeholder="e.g. ppm" />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>When
+            <input type="datetime-local" id="entry-timestamp" />
+          </label>
+          <label class="grow">Notes
+            <input type="text" id="entry-notes" placeholder="optional" />
+          </label>
+        </div>
+        <button type="submit">Add reading</button>
+      </form>
+
+      <div class="table-actions">
+        <a href="api/export.csv" download>Export CSV</a>
+        <label class="import-btn">
+          Import CSV
+          <input type="file" id="import-file" accept=".csv" hidden />
+        </label>
+      </div>
+
+      <table id="entries-table">
+        <thead>
+          <tr><th>When</th><th>Parameter</th><th>Value</th><th>Unit</th><th>Source</th><th>Notes</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="tab-targets" class="tab">
+      <h2>Target ranges</h2>
+      <p class="hint">Set the acceptable low/high range per parameter. Out-of-range readings are highlighted on the dashboard chart and counted in the stats panel.</p>
+      <table id="targets-table">
+        <thead>
+          <tr><th>Parameter</th><th>Low</th><th>High</th><th>Unit</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <form id="target-form" class="target-form">
+        <input type="text" id="target-parameter" placeholder="Parameter" required />
+        <input type="number" step="any" id="target-low" placeholder="Low" />
+        <input type="number" step="any" id="target-high" placeholder="High" />
+        <input type="text" id="target-unit" placeholder="Unit" />
+        <button type="submit">Save target</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
