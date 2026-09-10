@@ -1,5 +1,7 @@
 # Sump
 
+# If you've stumbled across this page, please don't try to use it. It's entirely vibe coded and in very early stages and not worth the time or risk to your system
+
 A free, open-source Home Assistant Add-on that acts as a central hub for
 home aquariums — starting with a long-term water quality logbook (the
 thing most UK zoos/aquariums currently keep in an Excel spreadsheet), and
